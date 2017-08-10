@@ -5,21 +5,36 @@ const counter = () => {
   // Example: const newCounter = counter();
   // newCounter(); // 1
   // newCounter(); // 2
+  let counterVar = 0;
+  return () => counterVar += 1;
 };
 
 const counterFactory = () => {
   // Return an object that has two methods called `increment` and `decrement`.
   // `increment` should increment a counter variable in closure scope and return it.
   // `decrement` should decrement the counter variable and return it.
+  let counterVar = 0;
+  const obj = {
+    increment: () => counterVar += 1,
+    decrement: () => counterVar -= 1
+  };
+  return obj;
 };
 
 const limitFunctionCallCount = (cb, n) => {
+  const times = n;
+  const invoke = () => {
+    for (let i = 0; i < n.length; i++) {
+      cb();
+    }
+  };
+  return invoke();
   // Should return a function that invokes `cb`.
   // The returned function should only allow `cb` to be invoked `n` times.
 };
 
 const cacheFunction = (cb) => {
-  // Should return a funciton that invokes `cb`.
+  // Should return a function that invokes `cb`.
   // A cache (object) should be kept in closure scope.
   // The cache should keep track of all arguments have been used to invoke this function.
   // If the returned function is invoked with arguments that it has already seen

@@ -22,7 +22,7 @@ const isThisMyFavorite = isMyFavoriteFood(food);
 const User = function(options) {
   this.username = options.username;
   this.password = options.password;
-  this.sayHi = function() {
+  sayHi = () => {
     return this.username + ' says hello!';
   };
 }
@@ -51,6 +51,6 @@ const argsToCb = function (cb) {
   return cb.apply(null, args.splice(1));
 };
 
-const result = argsToCb(addArgs, 1, 2, 3, 4, 5); //result should be 15
+const result = argsToCb(...args, 1, 2, 3, 4, 5); //result should be 15
 
 /* eslint-enable */
