@@ -27,6 +27,12 @@ const reduce = (elements, cb, memo = elements.shift()) => {
   // Combine all elements into a single value going from left to right.
   // Elements will be passed one by one into `cb`.
   // `memo` is the starting value.  If `memo` is undefined then make `elements[0]` the initial value.
+  let result = memo;
+
+  for (let i = 0; i < elements.length; i++) {
+    result = cb(result, elements[i]);
+  }
+  return result;
 };
 
 const find = (elements, cb) => {
@@ -44,11 +50,27 @@ const find = (elements, cb) => {
 const filter = (elements, cb) => {
   // Similar to `find` but you will return an array of all elements that passed the truth test
   // Return an empty array if no elements pass the truth test
+  const arr = [];
+  for (let i = 0; i < elements.length; i++) {
+    if (cb(elements[i]) === true) {
+      arr.push(elements[i]);
+    }
+  }
+  return arr;
 };
 
 const flatten = (elements) => {
   // Flattens a nested array (the nesting can be to any depth).
   // Example: flatten([1, [2], [3, [[4]]]]); => [1, 2, 3, 4];
+  let result = [];
+  for (let i = 0; i < elements.length; i++) {
+    if (Array.isArray(elements[i])) {
+      result = result.concat(flatten(elements[i]));
+    } else {
+      result.push(elements[i]);
+    }
+  }
+  return result;
 };
 
 /* eslint-enable no-unused-vars, max-len */
