@@ -3,7 +3,10 @@
 const nFibonacci = (n) => {
   // fibonacci sequence: 1 2 3 5 8 13 ...
   // return the nth number in the sequence
-
+  if (n <= 1) {
+    return 1;
+  }
+  return nFibonacci(n - 1) + nFibonacci(n - 2);
 };
 
 const nFactorial = (n) => {
@@ -18,6 +21,18 @@ const nFactorial = (n) => {
 const checkMatchingLeaves = (obj) => {
   // return true if every property on `obj` is the same
   // otherwise return false
+  const newArr = [];
+  for (let i = 0; i < obj.length; i++) {
+    newArr.push(obj[i]);
+  }
+  for (let i = 0; i < obj.length; i++) {
+    for (let j = 0; j < newArr.length; j++) {
+      if (obj[i] === newArr[j]) {
+        return false;
+      }
+    }
+  }
+  return true;
 };
 
 /* eslint-enable no-unused-vars */
